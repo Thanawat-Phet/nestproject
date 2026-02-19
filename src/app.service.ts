@@ -15,7 +15,8 @@ export class AppService {
       name:"Thanawat",
       lastName:"Srisuwan",
       age:21,
-      city:"phuket"
+      city:"phuket",
+      version: process.env.API_VERSION,
     }
   }
 
