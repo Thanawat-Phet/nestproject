@@ -17,6 +17,7 @@ export class AppService {
       age:21,
       city:"phuket",
       version: process.env.API_VERSION,
+      password:process.env.PASSWORD,
     }
   }
 
