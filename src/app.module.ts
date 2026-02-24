@@ -10,6 +10,8 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Dialect } from 'sequelize';
 import { Customer } from './customer/entities/customer.entity';
+import { StudentInfoModule } from './student-info/student-info.module';
+import { StudentInfo } from './student-info/entities/student-info.entity';
 @Module({
   imports: [ProductModule, YourinfoModule, UtilityModule, GlobalHelperModule, CustomerModule, ConfigModule.forRoot(),
     SequelizeModule.forRoot({
@@ -18,13 +20,17 @@ import { Customer } from './customer/entities/customer.entity';
     port: Number(process.env.DB_PORT),
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    models: [Customer], //Table
+    // database: process.env.DB_DATABASE,
+    database: process.env.DB_DATABASE2,
+    models: [StudentInfo], //Table
+    autoLoadModels: true,
+    sync:{alter:true},
   }),
   ProductModule,
   UtilityModule,
   GlobalHelperModule,
-  CustomerModule,  
+  CustomerModule,
+  StudentInfoModule,  
 ],
   controllers: [AppController],
   providers: [AppService],
