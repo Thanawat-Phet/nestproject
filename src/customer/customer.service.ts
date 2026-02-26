@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -21,12 +21,33 @@ export class CustomerService {
     return this.customerModel.findAll();
   }
 
-  findOne(id: number) {
-    return this.customerModel.findOne({where:{id}});
+  async findFullname(fullname:string){
+    return  await this.customerModel.findOne({
+      where:{
+        fullname:fullname
+      },
+    });
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return this.customerModel.update(updateCustomerDto,{where:{id}});
+  async createCustomer(@Body() createCustomerDto: CreateCustomerDto){
+    return await this.customerModel.create(createCustomerDto as Partial<Customer>);
+  }
+
+  async updateCustomer(id:number, updateCustomerDto: UpdateCustomerDto){
+    return await this.customerModel.update(updateCustomerDto,{
+      where: {id: id}});
+  }
+
+  async removeCustomer(id:number){
+    return await this.customerModel.destroy({where:{id:id}});
+  }
+
+  async findOne(id: number) {
+    return await this.customerModel.findOne({where:{id}});
+  }
+
+  async update(id: number, updateCustomerDto: UpdateCustomerDto) {
+    return await this.customerModel.update(updateCustomerDto,{where:{id}});
   }
 
   remove(id: number) {

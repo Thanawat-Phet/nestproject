@@ -22,7 +22,7 @@ import { StudentInfo } from './student-info/entities/student-info.entity';
     password: process.env.DB_PASSWORD,
     // database: process.env.DB_DATABASE,
     database: process.env.DB_DATABASE2,
-    models: [StudentInfo], //Table
+    models: [StudentInfo,Customer], //Table
     autoLoadModels: true,
     sync:{alter:true},
   }),
